@@ -2,6 +2,7 @@
 """Find anagrams of words."""
 
 import json
+import logging
 import os
 import sys
 from typing import Set
@@ -9,6 +10,7 @@ from itertools import permutations
 from english_words import english_words_lower_alpha_set
 
 RESULTS_DIR = '/results/'
+LOGS_DIR = '/logs/'
 
 
 def find_anagrams(word: str) -> Set[str]:
@@ -23,9 +25,11 @@ def find_anagrams(word: str) -> Set[str]:
 
     """
     # Find all permutations of the word
+    logging.debug("Obtaining all permutations for %s", word)
     perms = {''.join(p) for p in permutations(word.lower())}
 
     # Filter out all non-English permutations
+    logging.debug("Filtering all permutations for %s", word)
     anagrams = {word for word in perms
                 if word in english_words_lower_alpha_set}
 
@@ -33,6 +37,19 @@ def find_anagrams(word: str) -> Set[str]:
     return anagrams
 
 if __name__ == '__main__':
+    # Set up the logger
+    uuid = os.environ['JOB_UUID']
+    logs_path = os.path.join(
+        LOGS_DIR,
+        uuid + '--logs.txt')
+
+    logger = logging.getLogger('main')
+    logger.setLevel(logging.DEBUG)
+
+    # Important part: make sure to log to a file!
+    file_logger = logging.FileHandler(logs_path)
+    file_logger.setLevel(logging.DEBUG)
+
     # Get the arguments as a raw JSON string
     raw_args = sys.argv[1]
 
@@ -42,10 +59,10 @@ if __name__ == '__main__':
     word = args['word']
 
     # Save anagrams
-    filename = os.path.join(
+    results_path = os.path.join(
         RESULTS_DIR,
         word + '.txt')
 
-    with open(filename, 'w') as f:
+    with open(results_path, 'w') as f:
         for result in find_anagrams(word):
             f.write(result + '\n')
