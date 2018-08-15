@@ -15,4 +15,4 @@ before_script:
 script:
   # Test that basic functionality doesn't fail
   - |-
-    ./main '{"word": "binary"}'
+    ./main.py '{"word": "binary"}'
