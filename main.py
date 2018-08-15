@@ -25,11 +25,11 @@ def find_anagrams(word: str) -> Set[str]:
 
     """
     # Find all permutations of the word
-    logging.debug("Obtaining all permutations for %s", word)
+    logging.debug("Obtaining all permutations for \"%s\"", word)
     perms = {''.join(p) for p in permutations(word.lower())}
 
     # Filter out all non-English permutations
-    logging.debug("Filtering all permutations for %s", word)
+    logging.debug("Filtering all permutations for \"%s\"", word)
     anagrams = {word for word in perms
                 if word in english_words_lower_alpha_set}
 
@@ -41,14 +41,12 @@ if __name__ == '__main__':
     uuid = os.environ['JOB_UUID']
     logs_path = os.path.join(
         LOGS_DIR,
-        uuid + '--logs.txt')
+        uuid + '-logs.txt')
 
-    logger = logging.getLogger('main')
-    logger.setLevel(logging.DEBUG)
-
-    # Important part: make sure to log to a file!
-    file_logger = logging.FileHandler(logs_path)
-    file_logger.setLevel(logging.DEBUG)
+    logging.basicConfig(
+        filename=logs_path,
+        level=logging.DEBUG,
+        format='%(levelname)s: %(message)s')
 
     # Get the arguments as a raw JSON string
     raw_args = sys.argv[1]
