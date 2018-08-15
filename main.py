@@ -10,7 +10,7 @@ from english_words import english_words_lower_alpha_set
 RESULTS_DIR = '/results/'
 
 
-def find_anagrams(word: str):
+def find_anagrams(word: str) -> set:
     """Find all one-word anagrams of a word.
 
     Arg:
