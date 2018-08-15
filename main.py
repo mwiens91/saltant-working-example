@@ -2,9 +2,13 @@
 """Find anagrams of words."""
 
 import json
+import os
 import sys
 from itertools import permutations
 from english_words import english_words_lower_alpha_set
+
+RESULTS_DIR = '/results/'
+
 
 def find_anagrams(word: str):
     """Find all one-word anagrams of a word.
@@ -34,6 +38,13 @@ if __name__ == '__main__':
     # Parse the raw JSON and return a dictionary of the parsed
     # arguments
     args = json.loads(raw_args)
+    word = args['word']
 
-    # Find anagrams
-    results = find_anagrams(args['word'])
+    # Save anagrams
+    filename = os.path.join(
+        RESULTS_DIR,
+        word + '.txt')
+
+    with open(filename, 'w') as f:
+        for result in find_anagrams(word):
+            f.write(result + '\n')
