@@ -1,6 +1,8 @@
 #!/usr/bin/env python3
 """Find anagrams of words."""
 
+import json
+import sys
 from itertools import permutations
 from english_words import english_words_lower_alpha_set
 
@@ -26,4 +28,12 @@ def find_anagrams(word: str):
     return anagrams
 
 if __name__ == '__main__':
-    print(find_anagrams("binary"))
+    # Get the arguments as a raw JSON string
+    raw_args = sys.argv[1]
+
+    # Parse the raw JSON and return a dictionary of the parsed
+    # arguments
+    args = json.loads(raw_args)
+
+    # Find anagrams
+    results = find_anagrams(args['word'])
