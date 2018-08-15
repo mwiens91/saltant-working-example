@@ -1,12 +1,12 @@
 #!/usr/bin/env python3
 """Find anagrams of words."""
 
+from itertools import permutations
 import json
 import logging
 import os
 import sys
 from typing import Set
-from itertools import permutations
 from english_words import english_words_lower_alpha_set
 
 RESULTS_DIR = '/results/'
