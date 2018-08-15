@@ -16,3 +16,7 @@ script:
   # Test that basic functionality doesn't fail
   - |-
     ./main.py '{"word": "binary"}'
+
+  # Make sure the results from the previous command check out
+  - grep -zq "binary\sbrainy" results/binary.txt \
+      || grep -zq "brainy\sbinary" results/binary.txt
