@@ -4,15 +4,15 @@ python:
   - "3.6"
 env:
   # Create a fake job UUID
-  - JOB_UUID='jobuuid'
+  - JOB_UUID="jobuuid"
 before_script:
   # Swap out the default log and results directories for non-root
   # locations
   - sed -i 's@/results/@results/@' main.py
   - sed -i 's@/logs/@logs/@' main.py
-  - mkdir results
-  - mkdir logs
-
+  - mkdir results/
+  - mkdir logs/
 script:
   # Test that basic functionality doesn't fail
-  - ./main.py '{"word": "binary"}'
+  - |-
+    ./main '{"word": "binary"}'
