@@ -36,6 +36,7 @@ def find_anagrams(word: str) -> Set[str]:
     # Return the results
     return anagrams
 
+
 if __name__ == '__main__':
     # Set up the logger
     uuid = os.environ['JOB_UUID']
