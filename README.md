@@ -4,4 +4,5 @@
 
 # saltant working example
 
-Working example from saltant docs.
+Here's code from saltant documentation's working example, which you can
+find [here](https://saltant.readthedocs.io/en/latest/using/working-example.html).
