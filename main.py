@@ -9,8 +9,8 @@ import sys
 from typing import Set
 from english_words import english_words_lower_alpha_set
 
-RESULTS_DIR = '/results/'
 LOGS_DIR = '/logs/'
+RESULTS_DIR = '/results/'
 
 
 def find_anagrams(word: str) -> Set[str]:
